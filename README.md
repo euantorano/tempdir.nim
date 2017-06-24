@@ -1,4 +1,4 @@
-# tempdir
+# tempdir [![CircleCI](https://circleci.com/gh/euantorano/tempdir.nim/tree/master.svg?style=svg)](https://circleci.com/gh/euantorano/tempdir.nim/tree/master)
 
 A Nim library to create and manage temporary directories. Inspired by [the Rust library of the same name](https://github.com/rust-lang-nursery/tempdir).
 
@@ -8,6 +8,14 @@ A Nim library to create and manage temporary directories. Inspired by [the Rust 
 nimble install tempdir
 ```
 
+Or add the following to your `.nimble` file:
+
+```
+# Dependencies
+
+requires "tempdir >= 1.0.0"
+```
+
 ## [API Documentation](https://htmlpreview.github.io/?https://github.com/euantorano/tempdir.nim/blob/master/docs/tempdir.html)
 
 ## Usage
@@ -15,7 +23,7 @@ nimble install tempdir
 ```nim
 import tempdir
 
-# Create a new temporary directory in the system's temporary directory path, with directories having the prefix `test_`.
+# Create a new temporary directory in the system's temporary directory path, with directories having the prefix `test`.
 withTempDirectory(tmp, "test"):
   echo "Created temporary directory with path: ", tmp
   # At the end of this block, the temporary directory and all of its files will be deleted

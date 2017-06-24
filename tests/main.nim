@@ -2,13 +2,13 @@ import tempdir, unittest, os
 
 suite "tempdir tests":
   test "createTempDirectory creates directory":
-    var tmp = createTempDirectory("test")
+    let tmp = createTempDirectory("test")
 
     check dirExists(tmp) == true
 
   test "createTempDirectory in relative path creates absolute path":
-    var tmp = createTempDirectory("test", "./tmp")
-    
+    let tmp = createTempDirectory("test", "./tmp")
+
     check dirExists(tmp) == true
     check dirExists("./tmp") == true
     check isAbsolute(tmp) == true
