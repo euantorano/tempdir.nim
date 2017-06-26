@@ -12,18 +12,6 @@ jobs:
       - run:
           name: test
           command: nim c -r tests/main.nim
-  build_dev:
-    working_directory: /usr/src/tmpdir
-    docker:
-      - image: nimlang/nim:devel
-    branches:
-      only:
-        - master
-    steps:
-      - checkout
-      - run:
-          name: test
-          command: nim c -r tests/main.nim
   build_alpine:
     working_directory: /usr/src/tmpdir
     docker:
@@ -41,5 +29,4 @@ workflows:
   build_and_test:
     jobs:
       - build
-      - build_dev
       - build_alpine
