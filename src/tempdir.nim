@@ -14,11 +14,10 @@
 ##    let tmp2 = createTempDirectory("test", "./tmp")
 ##    echo "Created temporary directory with path: ", tmp2
 
-from os import getTempDir, isAbsolute, getCurrentDir, joinPath, existsDir, createDir, removeDir
-from random import random
+import os, random
 
 const
-  MaxNumAttempts = 1 shl 31
+  MaxNumAttempts = high(int)
     ## The number of attempts to create a unique random name for a tmeporary directory.
   TempDirectoryNameLength = 12
     ## The length of the random string used to create a temporary directory.
@@ -36,7 +35,7 @@ type
     ## Error raised when a temp directory fails to be created.
 
 proc getRandomDirName(buffer: var string, offset: int = 0) {.inline.} =
-  for i in 0..TempDirectoryNameLength - 1:
+  for i in 0..<TempDirectoryNameLength:
     buffer[offset+i] = random(RandomDirNameCharSet)
 
 proc createTempDirectory*(prefix: string = "", basePath: string = ""): string =
@@ -52,6 +51,7 @@ proc createTempDirectory*(prefix: string = "", basePath: string = ""): string =
     directoryName: string = newString(len(prefix) + TempDirectoryNameLength)
 
   directoryName[0..len(prefix)-1] = prefix
+
   for i in 0..MaxNumAttempts:
     getRandomDirName(directoryName, len(prefix))
     directoryPath = joinPath(base, directoryName)
