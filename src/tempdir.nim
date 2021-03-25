@@ -14,20 +14,21 @@
 ##    let tmp2 = createTempDirectory("test", "./tmp")
 ##    echo "Created temporary directory with path: ", tmp2
 
-import os, random
+from os import dirExists, createDir, isAbsolute, joinPath, getCurrentDir, removeDir
+from random import sample
 
 const
   MaxNumAttempts = high(int)
     ## The number of attempts to create a unique random name for a tmeporary directory.
   TempDirectoryNameLength = 12
     ## The length of the random string used to create a temporary directory.
-  RandomDirNameCharSet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J',
+  RandomDirNameCharSet = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J',
     'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T',
     'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b', 'c', 'd',
     'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n',
     'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x',
     'y', 'z', '0', '1', '2', '3', '4', '5', '6', '7',
-    '8', '9']
+    '8', '9'}
     ## The character set to use when creating random directory names.
 
 type
@@ -36,7 +37,7 @@ type
 
 proc getRandomDirName(buffer: var string, offset: int = 0) {.inline.} =
   for i in 0..<TempDirectoryNameLength:
-    buffer[offset+i] = random(RandomDirNameCharSet)
+    buffer[offset+i] = sample(RandomDirNameCharSet)
 
 proc createTempDirectory*(prefix: string = "", basePath: string = ""): string =
   ## Get a temporary directory path with the given `prefix` within the given base path `basePath`.
@@ -56,13 +57,13 @@ proc createTempDirectory*(prefix: string = "", basePath: string = ""): string =
     getRandomDirName(directoryName, len(prefix))
     directoryPath = joinPath(base, directoryName)
 
-    if not existsDir(directoryPath):
+    if not dirExists(directoryPath):
       createDir(directoryPath)
       return directoryPath
 
   raise newException(TempDirectoryCreationError, "Failed to create unique temporary directory name after " & $MaxNumAttempts & " attempts")
 
-template withTempDirectory*(dir: untyped, prefix: string, body: untyped): typed =
+template withTempDirectory*(dir: untyped, prefix: string, body: untyped): void =
   ## Create and use a temporary directory with the given `prefix`, deleting it and its contents upon completion.
   var dir: string = createTempDirectory(prefix)
   try:
