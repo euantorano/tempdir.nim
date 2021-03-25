@@ -8,3 +8,4 @@ src/*
 nimsuggest.log
 tmp
 .vscode
+docs/

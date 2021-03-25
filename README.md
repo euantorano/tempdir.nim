@@ -1,4 +1,4 @@
-# tempdir [![CircleCI](https://circleci.com/gh/euantorano/tempdir.nim/tree/master.svg?style=svg)](https://circleci.com/gh/euantorano/tempdir.nim/tree/master)
+# tempdir
 
 A Nim library to create and manage temporary directories. Inspired by [the Rust library of the same name](https://github.com/rust-lang-nursery/tempdir).
 
@@ -13,10 +13,8 @@ Or add the following to your `.nimble` file:
 ```
 # Dependencies
 
-requires "tempdir >= 1.0.0"
+requires "tempdir >= 1.0.1"
 ```
-
-## [API Documentation](https://htmlpreview.github.io/?https://github.com/euantorano/tempdir.nim/blob/master/docs/tempdir.html)
 
 ## Usage
 

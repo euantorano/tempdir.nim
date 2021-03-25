@@ -1,4 +1,0 @@
-Example	tempdir.html#example	 Example	
-TempDirectoryCreationError	tempdir.html#TempDirectoryCreationError	tempdir : TempDirectoryCreationError	
-createTempDirectory	tempdir.html#createTempDirectory,string,string	tempdir : createTempDirectory*(prefix: string = &quot;&quot;; basePath: string = &quot;&quot;): string	
-withTempDirectory	tempdir.html#withTempDirectory.t,untyped,string,untyped	tempdir : withTempDirectory*(dir: untyped; prefix: string; body: untyped): typed	
